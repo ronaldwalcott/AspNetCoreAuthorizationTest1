@@ -1,0 +1,13 @@
+﻿@model string 
+
+<form asp-action="Delete" role="form">
+
+    <h4>Delete User</h4>
+    Are you sure you want to delete @Model?
+    <div>
+        <input type="submit" value="Delete" class="btn btn-default" />
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</form>

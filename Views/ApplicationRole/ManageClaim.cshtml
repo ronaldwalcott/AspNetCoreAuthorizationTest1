@@ -1,0 +1,56 @@
+﻿@model AuthorizationTest1.Models.ApplicationUserViewModels.RoleClaimsViewModel
+@{
+    ViewData["Title"] = "ManageClaim";
+}
+<h2>ManageClaim</h2>
+<h4>RoleClaimsViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="ManageClaim">
+            <div class="row">
+                <div class="col-md-4">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="RoleName" class="control-label"></label>
+                        <input asp-for="RoleName" class="form-control" readonly />
+                        <span asp-validation-for="RoleName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @{ int i = 0; }
+                @foreach (var item in Model.RoleClaims)
+                {
+                    <div class="form-group col-sm-2">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="RoleClaims[i].HasClaim" /> @Html.DisplayFor(model => item.ClaimName)
+                            </label>
+                        </div>
+                    </div>
+                    //create two hidden fields for the id and rolename values
+                    <input type="hidden" asp-for="RoleClaims[i].Id" />
+                    <input type="hidden" asp-for="RoleClaims[i].ClaimName" />
+
+                    i++;
+                }
+
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
